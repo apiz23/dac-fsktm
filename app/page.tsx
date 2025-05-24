@@ -1,101 +1,93 @@
-import Image from "next/image";
+"use client";
+
+import BlobBackground from "@/components/blob-bg";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import Lenis from "@studio-freight/lenis";
+import { useEffect, useRef } from "react";
+import CountdownToJune11 from "@/components/countdown";
+import Footer from "@/components/footer/footer";
+import Header from "@/components/header/header";
+import { Button } from "@/components/ui/button";
+import Lottie from "lottie-react";
+import stopwatch from "@/public/anim/stopwatch.json";
+import graduate from "@/public/anim/graduate.json";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+	const lenisRef = useRef<Lenis | null>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+	useEffect(() => {
+		gsap.registerPlugin(ScrollTrigger);
+
+		const lenis = new Lenis();
+		lenisRef.current = lenis;
+
+		lenis.on("scroll", ScrollTrigger.update);
+
+		const raf = (time: number) => {
+			lenis.raf(time * 1000);
+		};
+		gsap.ticker.add(raf);
+		gsap.ticker.lagSmoothing(0);
+
+		return () => {
+			gsap.ticker.remove(raf);
+			lenis.destroy();
+		};
+	}, []);
+
+	const scrollToCountdown = () => {
+		const target = document.getElementById("countdown");
+		if (target && lenisRef.current) {
+			lenisRef.current.scrollTo(target, {
+				offset: 0,
+				duration: 1.5,
+				easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
+			});
+		}
+	};
+
+	return (
+		<>
+			<Header />
+			<div className="relative min-h-screen pt-12">
+				<BlobBackground />
+				<div className="w-72 h-72 mx-auto col-span-3">
+					<Lottie animationData={graduate} loop={true} />
+				</div>
+				<h1 className="z-10 scroll-m-20 text-4xl font-extrabold tracking-wide lg:text-[8vh] uppercase text-center mb-12">
+					2025 Dean award ceremony
+				</h1>
+				<div className="max-w-3xl mx-auto text-xl">
+					<p className="leading-7 [&:not(:first-child)]:mt-6 text-center">
+						Celebrating Academic Brilliance at FSKTM.
+					</p>
+				</div>
+				<div className="flex justify-center my-6">
+					<div className="flex justify-center my-6">
+						<Button
+							onClick={scrollToCountdown}
+							className="inline-block min-w-[120px] px-6 md:px-8 py-0 h-[50px] text-[#422800] text-[18px] font-semibold text-center bg-[#fbeee0] border-2 border-[#422800] rounded-[30px] shadow-[4px_4px_0_0_#422800] hover:bg-white active:shadow-[2px_2px_0_0_#422800] active:translate-x-[2px] active:translate-y-[2px] select-none"
+						>
+							Let{"'"}s Explore
+						</Button>
+					</div>
+				</div>
+			</div>
+			<div
+				className="min-h-screen grid grid-cols-1 md:grid-cols-7 items-center justify-items-center gap-8 px-4 py-10"
+				id="countdown"
+			>
+				<div className="w-96 h-96 mx-auto col-span-3">
+					<Lottie animationData={stopwatch} loop={true} />
+				</div>
+
+				<div className="w-full max-w-2xl col-span-4">
+					<CountdownToJune11 />
+				</div>
+			</div>
+
+			<Footer />
+		</>
+	);
 }
