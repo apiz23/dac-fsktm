@@ -60,7 +60,7 @@ export default function Body({
 									? "open"
 									: "closed"
 							}
-							className="m-0 flex overflow-hidden text-[32px] pr-[30px] pt-[10px] font-light lg:text-[5vw] lg:pr-[2vw]"
+							className="m-0 flex overflow-hidden text-[32px] pr-[30px] pt-[10px] font-light lg:text-[5vw] lg:pr-[2vw] tracking-wide"
 						>
 							{getChars(title)}
 						</motion.p>

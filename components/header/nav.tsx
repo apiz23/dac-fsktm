@@ -6,10 +6,13 @@ import Body from "./body";
 
 const links = [
 	{ title: "Home", href: "/", src: "home.png" },
-	{ title: "Shop", href: "/shop", src: "shop.png" },
-	{ title: "About Us", href: "/about", src: "home.png" },
-	{ title: "Lookbook", href: "/lookbook", src: "lookbook.png" },
-	{ title: "Contact", href: "/contact", src: "contact.png" },
+	{ title: "CheckEligable", href: "#eligible", src: "shop.png" },
+	{ title: "Countdown", href: "#countdown", src: "home.png" },
+	{
+		title: "TechVentura",
+		href: "https://tech-ventura.vercel.app/",
+		src: "home.png",
+	},
 ];
 
 export default function Nav() {
@@ -26,7 +29,7 @@ export default function Nav() {
 			exit="exit"
 			className="overflow-hidden"
 		>
-			<div className="flex flex-col gap-[50px] mb-20 lg:flex-row lg:justify-between lg:mb-0 bg-neutral-200">
+			<div className="flex flex-col gap-[50px] mb-20 lg:flex-row lg:justify-between lg:mb-0 bg-neutral-200 p-4 md:p-10">
 				<div className="flex flex-col justify-between">
 					<Body
 						links={links}

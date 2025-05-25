@@ -40,7 +40,7 @@ export default function Home() {
 	}, []);
 
 	const scrollToCountdown = () => {
-		const target = document.getElementById("countdown");
+		const target = document.getElementById("eligible");
 		if (target && lenisRef.current) {
 			lenisRef.current.scrollTo(target, {
 				offset: 0,
@@ -53,7 +53,7 @@ export default function Home() {
 	return (
 		<>
 			<Header />
-			<div className="relative min-h-screen pt-10">
+			<div className="relative min-h-screen pt-10 bg-white border-b-4 border-black">
 				<BlobBackground />
 				<div className="w-72 h-72 mx-auto col-span-3">
 					<Lottie animationData={graduate} loop={true} />
@@ -84,18 +84,18 @@ export default function Home() {
 					</div>
 				</div>
 			</div>
-			<div className="min-h-[50vh]">
+			<div className="min-h-[50vh] border-b-4 border-black" id="eligible">
 				<DeanAwardSearch />
 			</div>
 			<div
-				className="min-h-screen grid grid-cols-1 md:grid-cols-7 items-center justify-items-center md:gap-8 px-4 py-10 pb-20"
+				className="border-b-4 border-black min-h-screen grid grid-cols-1 md:grid-cols-7 items-center justify-items-center md:gap-8 px-4 py-10 pb-20 bg-gradient-to-b from-white to-neutral-200"
 				id="countdown"
 			>
 				<div className="w-fit md:w-96 h-3/4 md:h-96 mx-auto col-span-3">
 					<Lottie animationData={stopwatch} loop={true} />
 				</div>
 
-				<div className="w-full max-w-2xl col-span-4">
+				<div className="w-full max-w-2xl col-span-4 ">
 					<CountdownToJune11 />
 				</div>
 			</div>
