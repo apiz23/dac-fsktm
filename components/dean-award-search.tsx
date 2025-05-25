@@ -30,6 +30,7 @@ import congrats from "@/public/anim/congrats.json";
 import confetti from "canvas-confetti";
 import search from "@/public/anim/search.json";
 import { Loader2 } from "lucide-react";
+import { LineShadowText } from "./magicui/line-shadow-text";
 
 export default function DeanAwardSearch() {
 	const [sem, setSem] = useState<"1" | "2">("1");
@@ -111,7 +112,7 @@ export default function DeanAwardSearch() {
 	}
 
 	return (
-		<section className="min-h-screen py-12 bg-white">
+		<section className="h-screen py-20 bg-white">
 			<div className="mx-auto max-w-5xl text-center px-4">
 				<header className="mb-16">
 					<div className="w-full md:w-96 h-64 mx-auto">
@@ -119,10 +120,12 @@ export default function DeanAwardSearch() {
 					</div>
 
 					<h1 className="text-balance text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl mb-6">
-						<span className="bg-gradient-to-r from-blue-800 to-indigo-600 bg-clip-text text-transparent">
+						<span className="bg-gradient-to-r from-[#dac8b4] to-[#422800] bg-clip-text text-transparent">
 							Dean{"'"}s List Award
-						</span>{" "}
-						<span className="block mt-4">Eligibility Check</span>
+						</span>
+						<span className="block mt-4">
+							Eligibility <LineShadowText>Check</LineShadowText>
+						</span>
 					</h1>
 
 					<p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
@@ -133,7 +136,7 @@ export default function DeanAwardSearch() {
 
 				<Button
 					onClick={() => setOpenSearch(true)}
-					className="py-6 px-8 text-lg bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900"
+					className="inline-block z-50 w-fit md:px-8 py-0 h-[50px] text-[#422800] text-[18px] font-semibold text-center bg-[#fbeee0] border-2 border-[#422800] rounded-[30px] shadow-[4px_4px_0_0_#422800] hover:bg-white active:shadow-[2px_2px_0_0_#422800] active:translate-x-[2px] active:translate-y-[2px] select-none"
 				>
 					Check Your Eligibility
 				</Button>

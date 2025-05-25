@@ -8,7 +8,7 @@ import tvLogo from "@/public/img/tvLogo.png";
 export default function Content() {
 	return (
 		<footer className="bg-neutral-200 h-full w-full text-black flex flex-col">
-			<div className="flex-1 flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-12 py-8">
+			<div className="flex-1 flex flex-col justify-end px-4 sm:px-6 md:px-8 lg:px-12 pb-8">
 				<div className="max-w-7xl mx-auto w-full">
 					<Section1 />
 

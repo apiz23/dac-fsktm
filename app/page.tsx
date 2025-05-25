@@ -53,7 +53,7 @@ export default function Home() {
 	return (
 		<>
 			<Header />
-			<div className="relative min-h-screen pt-10 bg-white border-b-4 border-black">
+			<div className="relative min-h-screen pt-10 border-b-4 border-black">
 				<BlobBackground />
 				<div className="w-72 h-72 mx-auto col-span-3">
 					<Lottie animationData={graduate} loop={true} />
@@ -84,7 +84,7 @@ export default function Home() {
 					</div>
 				</div>
 			</div>
-			<div className="min-h-[50vh] border-b-4 border-black" id="eligible">
+			<div className="min-h-[70vh] border-b-4 border-black" id="eligible">
 				<DeanAwardSearch />
 			</div>
 			<div
