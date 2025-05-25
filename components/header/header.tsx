@@ -28,7 +28,7 @@ export default function Index() {
 
 				{/* Left side mobile: Title on small screens only */}
 				<Link href="/" className="sm:hidden text-black no-underline font-semibold">
-					FSKTM Ascend
+					DAC FSKTM
 				</Link>
 
 				{/* Center title for larger screens only */}
@@ -36,7 +36,7 @@ export default function Index() {
 					href="/"
 					className="hidden sm:block absolute left-1/2 transform -translate-x-1/2 text-black no-underline font-semibold"
 				>
-					FSKTM Ascend
+					DAC FSKTM
 				</Link>
 
 				{/* Right side: Menu button */}

@@ -7,35 +7,21 @@ const GID_MAP: Record<"1" | "2", string> = {
 
 async function fetchSheetData(sem: "1" | "2") {
 	const gid = GID_MAP[sem];
-
 	const publicSheetUrl = `https://docs.google.com/spreadsheets/d/e/2PACX-1vQOLfSHGlBn4EnkR0WvlZVpTy1UWF16md_2KveQ4p_GcqzXbit5k4rp3ysjd1uluw/pub?gid=${gid}&single=true&output=csv`;
 
 	const res = await fetch(publicSheetUrl);
 	if (!res.ok) throw new Error("Failed to fetch sheet data");
 
 	const csvText = await res.text();
-
-	// Split CSV into rows and cells, trim whitespace
-	const rows = csvText
+	return csvText
 		.split("\n")
 		.map((row) => row.split(",").map((cell) => cell.trim()));
-
-	return rows;
 }
 
 export async function GET(req: NextRequest) {
 	try {
 		const { searchParams } = new URL(req.url);
-
-		const sem = searchParams.get("sem") as "1" | "2" | null;
 		const id = searchParams.get("id");
-
-		if (!sem || !(sem in GID_MAP)) {
-			return NextResponse.json(
-				{ error: "Invalid or missing sem param" },
-				{ status: 400 }
-			);
-		}
 
 		if (!id) {
 			return NextResponse.json(
@@ -44,24 +30,33 @@ export async function GET(req: NextRequest) {
 			);
 		}
 
-		const data = await fetchSheetData(sem);
-
 		const matric = id.trim().toLowerCase().replace(/\s/g, "");
+		const results: Record<string, boolean> = {};
 
-		// Find row where column B (index 1) matches matric number ignoring spaces and case
-		const matched = data.find(
-			(row) => row[1]?.toLowerCase().replace(/\s/g, "") === matric
-		);
-
-		if (!matched) {
-			return NextResponse.json(
-				{ error: "Matric number not found" },
-				{ status: 404 }
-			);
+		// Check both semesters
+		for (const sem of ["1", "2"] as const) {
+			try {
+				const data = await fetchSheetData(sem);
+				const found = data.some(
+					(row) => row[1]?.toLowerCase().replace(/\s/g, "") === matric
+				);
+				results[`semester_${sem}`] = found;
+			} catch (err) {
+				console.error(`Error checking semester ${sem}:`, err);
+				results[`semester_${sem}`] = false;
+			}
 		}
 
-		// Return the matched row (array)
-		return NextResponse.json({ data: matched });
+		// Determine which semesters the student is eligible for
+		const eligibleSemesters = Object.entries(results)
+			.filter(([found]) => found)
+			.map(([sem]) => sem.replace("semester_", ""));
+
+		return NextResponse.json({
+			eligible: eligibleSemesters.length > 0,
+			eligibleSemesters,
+			results, // includes both semesters' results
+		});
 	} catch (err) {
 		if (err instanceof Error) {
 			return NextResponse.json({ error: err.message }, { status: 500 });

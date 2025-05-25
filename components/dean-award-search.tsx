@@ -24,7 +24,6 @@ import {
 } from "@/components/ui/drawer";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { Input } from "./ui/input";
-import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import Lottie from "lottie-react";
 import congrats from "@/public/anim/congrats.json";
 import confetti from "canvas-confetti";
@@ -33,12 +32,15 @@ import { Loader2 } from "lucide-react";
 import { LineShadowText } from "./magicui/line-shadow-text";
 
 export default function DeanAwardSearch() {
-	const [sem, setSem] = useState<"1" | "2">("1");
 	const [matric, setMatric] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState("");
 	const [openSearch, setOpenSearch] = useState(false);
 	const [openResult, setOpenResult] = useState(false);
+	const [eligibilityResult, setEligibilityResult] = useState<{
+		eligible: boolean;
+		eligibleSemesters: string[];
+	} | null>(null);
 
 	const isMobile = useIsMobile();
 
@@ -74,6 +76,7 @@ export default function DeanAwardSearch() {
 		e.preventDefault();
 		setLoading(true);
 		setError("");
+		setEligibilityResult(null);
 
 		if (!matric.trim()) {
 			setError("Please enter your matriculation number");
@@ -83,7 +86,7 @@ export default function DeanAwardSearch() {
 
 		try {
 			const res = await fetch(
-				`/api/dean-award/search?sem=${sem}&id=${encodeURIComponent(matric.trim())}`
+				`/api/dean-award/search?id=${encodeURIComponent(matric.trim())}`
 			);
 
 			if (!res.ok) {
@@ -92,13 +95,14 @@ export default function DeanAwardSearch() {
 			}
 
 			const data = await res.json();
+			setEligibilityResult(data);
 
-			if (data.data) {
+			if (data.eligible) {
 				setOpenSearch(false);
 				setOpenResult(true);
 				triggerConfetti();
 			} else {
-				setError("No eligible record found");
+				setError("No eligible record found for either semester");
 			}
 		} catch (err) {
 			if (err instanceof Error) {
@@ -143,39 +147,15 @@ export default function DeanAwardSearch() {
 
 				{isMobile ? (
 					<Drawer open={openSearch} onOpenChange={setOpenSearch}>
-						<DrawerContent className="h-[60vh]">
+						<DrawerContent className="h-fit">
 							<DrawerHeader>
 								<DrawerTitle className="text-2xl">Check Eligibility</DrawerTitle>
 								<DrawerDescription>
-									Enter your details to verify your qualification
+									Enter your matriculation number to verify your qualification
 								</DrawerDescription>
 							</DrawerHeader>
 							<div className="p-6 overflow-y-auto">
 								<form onSubmit={handleSearch} className="space-y-6">
-									<div>
-										<Label className="block text-left mb-3 font-medium text-gray-700">
-											Semester
-										</Label>
-										<RadioGroup
-											value={sem}
-											onValueChange={(value) => setSem(value as "1" | "2")}
-											className="flex gap-6"
-										>
-											<div className="flex items-center space-x-2">
-												<RadioGroupItem value="1" id="sem-1" />
-												<Label htmlFor="sem-1" className="text-gray-700">
-													Semester 1
-												</Label>
-											</div>
-											<div className="flex items-center space-x-2">
-												<RadioGroupItem value="2" id="sem-2" />
-												<Label htmlFor="sem-2" className="text-gray-700">
-													Semester 2
-												</Label>
-											</div>
-										</RadioGroup>
-									</div>
-
 									<div>
 										<Label
 											htmlFor="matric"
@@ -203,7 +183,7 @@ export default function DeanAwardSearch() {
 									<Button
 										type="submit"
 										disabled={loading}
-										className="w-full py-3 px-6 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-lg hover:from-blue-700 hover:to-blue-900 transition-all shadow-md disabled:opacity-70"
+										className="inline-flex items-center justify-center w-full min-w-[140px] sm:min-w-[160px] px-4 sm:px-6 md:px-8 py-2 h-12 sm:h-14 text-base sm:text-lg md:text-xl font-semibold text-[#422800] bg-[#fbeee0] border-2 border-[#422800] rounded-[30px] shadow-[4px_4px_0_0_#422800] hover:bg-white transition-all active:shadow-[2px_2px_0_0_#422800] active:translate-x-[2px] active:translate-y-[2px] select-none"
 									>
 										{loading ? (
 											<span className="flex items-center justify-center gap-2">
@@ -216,11 +196,6 @@ export default function DeanAwardSearch() {
 									</Button>
 								</form>
 							</div>
-							<DrawerFooter>
-								<DrawerClose asChild>
-									<Button variant="outline">Cancel</Button>
-								</DrawerClose>
-							</DrawerFooter>
 						</DrawerContent>
 					</Drawer>
 				) : (
@@ -229,35 +204,11 @@ export default function DeanAwardSearch() {
 							<DialogHeader>
 								<DialogTitle>Check Eligibility</DialogTitle>
 								<DialogDescription>
-									Enter your details to verify your qualification
+									Enter your matriculation number to verify your qualification
 								</DialogDescription>
 							</DialogHeader>
 							<div className="py-4">
 								<form onSubmit={handleSearch} className="space-y-6">
-									<div>
-										<Label className="block text-left mb-3 font-medium text-gray-700">
-											Semester
-										</Label>
-										<RadioGroup
-											value={sem}
-											onValueChange={(value) => setSem(value as "1" | "2")}
-											className="flex gap-6"
-										>
-											<div className="flex items-center space-x-2">
-												<RadioGroupItem value="1" id="sem-1" />
-												<Label htmlFor="sem-1" className="text-gray-700">
-													Semester 1
-												</Label>
-											</div>
-											<div className="flex items-center space-x-2">
-												<RadioGroupItem value="2" id="sem-2" />
-												<Label htmlFor="sem-2" className="text-gray-700">
-													Semester 2
-												</Label>
-											</div>
-										</RadioGroup>
-									</div>
-
 									<div>
 										<Label
 											htmlFor="matric"
@@ -287,7 +238,7 @@ export default function DeanAwardSearch() {
 										<Button
 											type="submit"
 											disabled={loading}
-											className="w-full py-3 px-6 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-lg hover:from-blue-700 hover:to-blue-900 transition-all shadow-md disabled:opacity-70"
+											className="inline-flex items-center justify-center w-full min-w-[140px] sm:min-w-[160px] px-4 sm:px-6 md:px-8 py-2 h-12 sm:h-14 text-base sm:text-lg md:text-xl font-semibold text-[#422800] bg-[#fbeee0] border-2 border-[#422800] rounded-[30px] shadow-[4px_4px_0_0_#422800] hover:bg-white transition-all active:shadow-[2px_2px_0_0_#422800] active:translate-x-[2px] active:translate-y-[2px] select-none"
 										>
 											{loading ? (
 												<span className="flex items-center justify-center gap-2">
@@ -310,15 +261,26 @@ export default function DeanAwardSearch() {
 						<DrawerContent className="h-[80vh]">
 							<DrawerHeader>
 								<DrawerTitle className="text-2xl text-green-600">
-									Congratulations!
+									{eligibilityResult?.eligibleSemesters.length === 2
+										? "Congratulations!"
+										: "Well Done!"}
 								</DrawerTitle>
 								<DrawerDescription>
-									You{"'"}ve qualified for the Dean{"'"}s List Award
+									{eligibilityResult?.eligibleSemesters.length === 2
+										? "You've qualified for both semesters!"
+										: `You've qualified for Semester ${eligibilityResult?.eligibleSemesters[0]}!`}
 								</DrawerDescription>
 							</DrawerHeader>
 							<div className="p-6 overflow-y-auto">
 								<div className="w-full h-72 mx-auto">
 									<Lottie animationData={congrats} loop={false} />
+								</div>
+								<div className="mt-4 text-center">
+									{eligibilityResult?.eligibleSemesters.map((sem) => (
+										<div key={sem} className="mb-2 text-lg font-medium">
+											✅ Eligible for Semester {sem} 23/24
+										</div>
+									))}
 								</div>
 							</div>
 							<p className="text-center text-gray-600 mt-4">
@@ -326,7 +288,7 @@ export default function DeanAwardSearch() {
 							</p>
 							<DrawerFooter className="gap-3">
 								<Link href="/dean-award/register" passHref>
-									<Button className="w-full bg-green-600 hover:bg-green-700 ">
+									<Button className="w-full bg-green-600 hover:bg-green-700">
 										Register Here
 									</Button>
 								</Link>
@@ -342,21 +304,29 @@ export default function DeanAwardSearch() {
 					<Dialog open={openResult} onOpenChange={setOpenResult}>
 						<DialogContent>
 							<DialogHeader>
-								<DialogTitle>Congratulations!</DialogTitle>
+								<DialogTitle className="text-green-600">
+									{eligibilityResult?.eligibleSemesters.length === 2
+										? "Double Congratulations!"
+										: "Congratulations!"}
+								</DialogTitle>
 								<DialogDescription>
-									You are eligible to register for the Dean Award ceremony.
+									{eligibilityResult?.eligibleSemesters.length === 2
+										? "You've made the Dean's List for both semesters!"
+										: `You've made the Dean's List for Semester ${eligibilityResult?.eligibleSemesters[0]}!`}
 								</DialogDescription>
 							</DialogHeader>
 							<div className="w-fit md:w-96 h-3/4 md:h-96 mx-auto">
 								<Lottie animationData={congrats} loop={true} />
 							</div>
+							<div className="text-center space-y-2">
+								{eligibilityResult?.eligibleSemesters.map((sem) => (
+									<div key={sem} className="text-lg font-medium">
+										🎉 Eligible for Semester {sem} 23/24
+									</div>
+								))}
+							</div>
 							<DialogFooter>
-								<Link
-									href="https://forms.gle/your-google-form-link"
-									target="_blank"
-									passHref
-									className="w-full"
-								>
+								<Link href="/dean-award/register" passHref className="w-full">
 									<Button className="w-full mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
 										Register Here
 									</Button>

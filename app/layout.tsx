@@ -9,8 +9,39 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-	title: "FSKTM Ascend",
-	description: "FSKTM Dean Award Ceremony",
+	title: "FSKTM Dean's Award Ceremony 2024 🎓 | UTHM",
+	description:
+		"🎉 Celebrating academic excellence at Faculty of Computer Science and Information Technology (FSKTM), Universiti Tun Hussein Onn Malaysia. Join us for the prestigious Dean's Award Ceremony! 🏆",
+	icons: {
+		icon: [
+			{
+				url: "/icon/favicon.ico",
+				href: "/icon/favicon.ico",
+			},
+		],
+	},
+	keywords: [
+		"FSKTM",
+		"Dean Award",
+		"UTHM",
+		"academic excellence",
+		"award ceremony",
+	],
+	openGraph: {
+		title: "FSKTM Dean's Award Ceremony 2024 🎓",
+		description:
+			"🎉 Celebrating top achievers at FSKTM UTHM's annual Dean's Award Ceremony. Recognizing excellence in computer science education. 🏆",
+		type: "website",
+		url: "https://dac-fsktm.vercel.app",
+		images: [
+			{
+				url: "/img/fsktmlogo.png",
+				width: 1200,
+				height: 630,
+				alt: "FSKTM Dean's Award Ceremony 2024",
+			},
+		],
+	},
 };
 
 export default function RootLayout({

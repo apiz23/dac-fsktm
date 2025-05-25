@@ -27,7 +27,7 @@ export default function BlobBackground() {
 				<div
 					className="relative"
 					style={{
-						top: isMobile ? "250px" : "-90px",
+						top: isMobile ? "170px" : "-90px",
 						left: isMobile ? "30px" : "50px",
 						width: isMobile ? "200px" : "350px",
 						height: isMobile ? "400px" : "550px",
@@ -54,7 +54,7 @@ export default function BlobBackground() {
 				<div
 					className="relative"
 					style={{
-						top: isMobile ? "150px" : "-150px",
+						top: isMobile ? "100px" : "-150px",
 						right: isMobile ? "30px" : "-100px",
 						width: isMobile ? "200px" : "260px",
 						height: isMobile ? "500px" : "720px",

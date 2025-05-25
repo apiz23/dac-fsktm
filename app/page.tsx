@@ -15,6 +15,7 @@ import graduate from "@/public/anim/graduate.json";
 import DeanAwardSearch from "@/components/dean-award-search";
 import fsktmLogo from "@/public/img/fsktmlogo.png";
 import Image from "next/image";
+import { LineShadowText } from "@/components/magicui/line-shadow-text";
 
 export default function Home() {
 	const lenisRef = useRef<Lenis | null>(null);
@@ -53,31 +54,38 @@ export default function Home() {
 	return (
 		<>
 			<Header />
-			<div className="relative min-h-screen pt-10 border-b-4 border-black">
+			<div className="relative min-h-screen pt-6 md:pt-10 border-b-4 border-black">
 				<BlobBackground />
-				<div className="w-72 h-72 mx-auto col-span-3">
-					<Lottie animationData={graduate} loop={true} />
-				</div>
-				<Image
-					src={fsktmLogo}
-					alt="logo"
-					width={1000}
-					height={1000}
-					className="h-14 md:h-28 w-fit mx-auto mb-10"
-				/>
-				<h1 className="z-10 scroll-m-20 text-4xl font-extrabold tracking-wide lg:text-[8vh] uppercase text-center mb-12">
-					2025 Dean award ceremony
-				</h1>
-				<div className="max-w-3xl mx-auto text-xl">
-					<p className="leading-7 [&:not(:first-child)]:mt-6 text-center">
-						Celebrating Academic Brilliance at FSKTM.
-					</p>
-				</div>
-				<div className="flex justify-center my-6">
-					<div className="flex justify-center my-6">
+
+				<div className="container mx-auto px-4 sm:px-6 flex flex-col items-center justify-center h-full">
+					<div className="w-48 h-48 sm:w-60 sm:h-60 mx-auto">
+						<Lottie animationData={graduate} loop={true} />
+					</div>
+
+					<Image
+						src={fsktmLogo}
+						alt="FSKTM Logo"
+						width={1000}
+						height={1000}
+						className="h-16 md:h-28 lg:h-32 w-auto mx-auto mb-6 md:mb-10"
+					/>
+
+					<h1 className="z-10 scroll-m-20 max-w-4xl mx-auto px-4 text-3xl sm:text-4xl md:text-5xl lg:text-[6vh] xl:text-[8vh] font-extrabold tracking-wide uppercase text-center mb-6 md:mb-10 lg:mb-12">
+						<span className="text-black">
+							2023/2024 Dean Award{" "}
+						</span>
+						<LineShadowText>Ceremony</LineShadowText>
+					</h1>
+					<div className="max-w-3xl mx-auto px-4 text-lg sm:text-xl md:text-2xl">
+						<p className="leading-7 sm:leading-8 text-center">
+							Celebrating Academic Brilliance at FSKTM
+						</p>
+					</div>
+
+					<div className="flex justify-center my-6 md:my-8 lg:my-10 w-full px-4">
 						<Button
 							onClick={scrollToCountdown}
-							className="inline-block min-w-[120px] px-6 md:px-8 py-0 h-[50px] text-[#422800] text-[18px] font-semibold text-center bg-[#fbeee0] border-2 border-[#422800] rounded-[30px] shadow-[4px_4px_0_0_#422800] hover:bg-white active:shadow-[2px_2px_0_0_#422800] active:translate-x-[2px] active:translate-y-[2px] select-none"
+							className="inline-flex items-center justify-center min-w-[140px] sm:min-w-[160px] px-4 sm:px-6 md:px-8 py-2 h-12 sm:h-14 text-base sm:text-lg md:text-xl font-semibold text-[#422800] bg-[#fbeee0] border-2 border-[#422800] rounded-[30px] shadow-[4px_4px_0_0_#422800] hover:bg-white transition-all active:shadow-[2px_2px_0_0_#422800] active:translate-x-[2px] active:translate-y-[2px] select-none"
 						>
 							Let{"'"}s Explore
 						</Button>
