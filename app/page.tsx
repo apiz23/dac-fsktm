@@ -13,6 +13,8 @@ import Lottie from "lottie-react";
 import stopwatch from "@/public/anim/stopwatch.json";
 import graduate from "@/public/anim/graduate.json";
 import DeanAwardSearch from "@/components/dean-award-search";
+import fsktmLogo from "@/public/img/fsktmlogo.png";
+import Image from "next/image";
 
 export default function Home() {
 	const lenisRef = useRef<Lenis | null>(null);
@@ -51,11 +53,18 @@ export default function Home() {
 	return (
 		<>
 			<Header />
-			<div className="relative min-h-screen pt-12">
+			<div className="relative min-h-screen pt-10">
 				<BlobBackground />
 				<div className="w-72 h-72 mx-auto col-span-3">
 					<Lottie animationData={graduate} loop={true} />
 				</div>
+				<Image
+					src={fsktmLogo}
+					alt="logo"
+					width={1000}
+					height={1000}
+					className="h-14 md:h-28 w-fit mx-auto mb-10"
+				/>
 				<h1 className="z-10 scroll-m-20 text-4xl font-extrabold tracking-wide lg:text-[8vh] uppercase text-center mb-12">
 					2025 Dean award ceremony
 				</h1>

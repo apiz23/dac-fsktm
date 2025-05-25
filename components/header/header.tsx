@@ -6,21 +6,41 @@ import { background, fadeTransform } from "./anim";
 import { Menu, X } from "lucide-react";
 import { Button } from "../ui/button";
 import Nav from "./nav";
+import Image from "next/image";
+import uthmLogo from "@/public/img/logoUthm.png";
 
 export default function Index() {
 	const [isActive, setIsActive] = useState(false);
 
 	return (
 		<div className="fixed w-screen box-border p-2 z-50 border-b-2 border-black bg-white">
-			<div className="flex justify-between items-center uppercase text-[25px] sm:text-[30px] font-normal relative z-50">
-				<Link href="/" className="text-black no-underline">
+			<div className="flex justify-between items-center text-[25px] sm:text-[30px] font-normal relative z-50">
+				{/* Left side: logo (hidden on mobile) */}
+				<div className="hidden sm:flex items-center md:px-5">
+					<Image
+						src={uthmLogo}
+						alt="fsktmLogo"
+						width={1000}
+						height={1000}
+						className="h-10 w-fit"
+					/>
+				</div>
+
+				{/* Left side mobile: Title on small screens only */}
+				<Link href="/" className="sm:hidden text-black no-underline font-semibold">
 					FSKTM Ascend
 				</Link>
 
-				<div
-					onClick={() => setIsActive(!isActive)}
-					className="flex items-center justify-center gap-2 cursor-pointer"
+				{/* Center title for larger screens only */}
+				<Link
+					href="/"
+					className="hidden sm:block absolute left-1/2 transform -translate-x-1/2 text-black no-underline font-semibold"
 				>
+					FSKTM Ascend
+				</Link>
+
+				{/* Right side: Menu button */}
+				<div className="flex items-center justify-center gap-2 cursor-pointer">
 					<div
 						onClick={() => setIsActive(!isActive)}
 						className="flex items-end justify-end gap-2 cursor-pointer relative"
