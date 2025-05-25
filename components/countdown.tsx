@@ -37,7 +37,7 @@ export default function CountdownToJune11() {
 	}, []);
 
 	return (
-		<div className="text-center my-20">
+		<div className="text-center md:my-20">
 			<h2 className="md:text-5xl text-4xl font-bold">Countdown to Ceremony Day</h2>
 			<div className="grid grid-cols-2 md:grid-cols-4 gap-4 justify-center mt-6 text-lg font-semibold px-2">
 				<div className="p-4 bg-white shadow-md rounded-lg">

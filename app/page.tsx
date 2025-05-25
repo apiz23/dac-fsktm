@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import Lottie from "lottie-react";
 import stopwatch from "@/public/anim/stopwatch.json";
 import graduate from "@/public/anim/graduate.json";
+import DeanAwardSearch from "@/components/dean-award-search";
 
 export default function Home() {
 	const lenisRef = useRef<Lenis | null>(null);
@@ -42,7 +43,7 @@ export default function Home() {
 			lenisRef.current.scrollTo(target, {
 				offset: 0,
 				duration: 1.5,
-				easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
+				easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
 			});
 		}
 	};
@@ -74,11 +75,14 @@ export default function Home() {
 					</div>
 				</div>
 			</div>
+			<div className="min-h-[50vh]">
+				<DeanAwardSearch />
+			</div>
 			<div
-				className="min-h-screen grid grid-cols-1 md:grid-cols-7 items-center justify-items-center gap-8 px-4 py-10"
+				className="min-h-screen grid grid-cols-1 md:grid-cols-7 items-center justify-items-center md:gap-8 px-4 py-10 pb-20"
 				id="countdown"
 			>
-				<div className="w-96 h-96 mx-auto col-span-3">
+				<div className="w-fit md:w-96 h-3/4 md:h-96 mx-auto col-span-3">
 					<Lottie animationData={stopwatch} loop={true} />
 				</div>
 

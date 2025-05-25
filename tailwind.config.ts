@@ -58,6 +58,7 @@ export default {
 			},
 			animation: {
 				blob: "blob 7s infinite",
+				"line-shadow": "line-shadow 15s linear infinite",
 			},
 			keyframes: {
 				blob: {
@@ -65,6 +66,11 @@ export default {
 					"33%": { transform: "translate(30px, -50px) scale(1.1)" },
 					"66%": { transform: "translate(-20px, 20px) scale(0.9)" },
 					"100%": { transform: "translate(0px, 0px) scale(1)" },
+				},
+				"line-shadow": {
+					// your new keyframe here
+					"0%": { "background-position": "0 0" },
+					"100%": { "background-position": "100% -100%" },
 				},
 			},
 		},

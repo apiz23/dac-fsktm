@@ -11,7 +11,7 @@ export default function Index() {
 	const [isActive, setIsActive] = useState(false);
 
 	return (
-		<div className="fixed w-full box-border p-2 sm:p-4 z-50 border-b-2 border-black bg-white">
+		<div className="fixed w-screen box-border p-2 z-50 border-b-2 border-black bg-white">
 			<div className="flex justify-between items-center uppercase text-[25px] sm:text-[30px] font-normal relative z-50">
 				<Link href="/" className="text-black no-underline">
 					FSKTM Ascend
@@ -34,7 +34,7 @@ export default function Index() {
 
 						<AnimatePresence mode="wait">
 							<Button
-								className="inline-block z-50 w-fit px-6 md:px-8 py-0 h-[50px] text-[#422800] text-[18px] font-semibold text-center bg-[#fbeee0] border-2 border-[#422800] rounded-[30px] shadow-[4px_4px_0_0_#422800] hover:bg-white active:shadow-[2px_2px_0_0_#422800] active:translate-x-[2px] active:translate-y-[2px] select-none"
+								className="inline-block z-50 w-fit md:px-8 py-0 h-[50px] text-[#422800] text-[18px] font-semibold text-center bg-[#fbeee0] border-2 border-[#422800] rounded-[30px] shadow-[4px_4px_0_0_#422800] hover:bg-white active:shadow-[2px_2px_0_0_#422800] active:translate-x-[2px] active:translate-y-[2px] select-none"
 								role="button"
 							>
 								<motion.div
