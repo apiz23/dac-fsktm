@@ -10,7 +10,6 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogDescription,
-	DialogClose,
 	DialogFooter,
 } from "@/components/ui/dialog";
 import {
@@ -20,7 +19,6 @@ import {
 	DrawerTitle,
 	DrawerDescription,
 	DrawerFooter,
-	DrawerClose,
 } from "@/components/ui/drawer";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { Input } from "./ui/input";
@@ -95,9 +93,20 @@ export default function DeanAwardSearch() {
 			}
 
 			const data = await res.json();
-			setEligibilityResult(data);
 
-			if (data.eligible) {
+			// Filter eligible semesters based on the results object
+			const filteredEligibleSemesters = data.results
+				? Object.keys(data.results)
+						.filter((sem) => data.results[sem])
+						.map((sem) => sem.replace("semester_", ""))
+				: [];
+
+			setEligibilityResult({
+				eligible: filteredEligibleSemesters.length > 0,
+				eligibleSemesters: filteredEligibleSemesters,
+			});
+
+			if (filteredEligibleSemesters.length > 0) {
 				setOpenSearch(false);
 				setOpenResult(true);
 				triggerConfetti();
@@ -287,16 +296,15 @@ export default function DeanAwardSearch() {
 								You{"'"}re invited to attend the award ceremony
 							</p>
 							<DrawerFooter className="gap-3">
-								<Link href="/dean-award/register" passHref>
-									<Button className="w-full bg-green-600 hover:bg-green-700">
+								<Link
+									href="https://docs.google.com/forms/d/e/1FAIpQLSf22DDln9VZkwMl9F0ik2kECX-r4ut1rJz0ZPUnal5BSBNM8w/closedform"
+									target="_blank"
+									passHref
+								>
+									<Button className="w-full inline-flex items-center justify-center min-w-[140px] sm:min-w-[160px] px-4 sm:px-6 md:px-8 py-2 h-12 sm:h-14 text-base sm:text-lg md:text-xl font-semibold text-[#422800] bg-[#fbeee0] border-2 border-[#422800] rounded-[30px] shadow-[4px_4px_0_0_#422800] hover:bg-white transition-all active:shadow-[2px_2px_0_0_#422800] active:translate-x-[2px] active:translate-y-[2px] select-none">
 										Register Here
 									</Button>
 								</Link>
-								<DrawerClose asChild>
-									<Button variant="outline" className="w-full">
-										Close
-									</Button>
-								</DrawerClose>
 							</DrawerFooter>
 						</DrawerContent>
 					</Drawer>
@@ -326,16 +334,16 @@ export default function DeanAwardSearch() {
 								))}
 							</div>
 							<DialogFooter>
-								<Link href="/dean-award/register" passHref className="w-full">
-									<Button className="w-full mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+								<Link
+									href="https://docs.google.com/forms/d/e/1FAIpQLSf22DDln9VZkwMl9F0ik2kECX-r4ut1rJz0ZPUnal5BSBNM8w/closedform"
+									target="_blank"
+									passHref
+									className="w-full"
+								>
+									<Button className="w-full inline-flex items-center justify-center min-w-[140px] sm:min-w-[160px] px-4 sm:px-6 md:px-8 py-2 h-12 sm:h-14 text-base sm:text-lg md:text-xl font-semibold text-[#422800] bg-[#fbeee0] border-2 border-[#422800] rounded-[30px] shadow-[4px_4px_0_0_#422800] hover:bg-white transition-all active:shadow-[2px_2px_0_0_#422800] active:translate-x-[2px] active:translate-y-[2px] select-none">
 										Register Here
 									</Button>
 								</Link>
-								<DialogClose asChild>
-									<Button variant="outline" className="mt-4 w-full">
-										Close
-									</Button>
-								</DialogClose>
 							</DialogFooter>
 						</DialogContent>
 					</Dialog>

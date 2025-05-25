@@ -13,8 +13,6 @@ import Lottie from "lottie-react";
 import stopwatch from "@/public/anim/stopwatch.json";
 import graduate from "@/public/anim/graduate.json";
 import DeanAwardSearch from "@/components/dean-award-search";
-import fsktmLogo from "@/public/img/fsktmlogo.png";
-import Image from "next/image";
 import { LineShadowText } from "@/components/magicui/line-shadow-text";
 
 export default function Home() {
@@ -54,26 +52,15 @@ export default function Home() {
 	return (
 		<>
 			<Header />
-			<div className="relative min-h-screen pt-6 md:pt-10 border-b-4 border-black">
+			<div className="relative min-h-screen pt-20 md:pt-10 border-b-4 border-black">
 				<BlobBackground />
-
 				<div className="container mx-auto px-4 sm:px-6 flex flex-col items-center justify-center h-full">
-					<div className="w-48 h-48 sm:w-60 sm:h-60 mx-auto">
+					<div className="w-56 h-56 sm:w-80 sm:h-80 mx-auto">
 						<Lottie animationData={graduate} loop={true} />
 					</div>
 
-					<Image
-						src={fsktmLogo}
-						alt="FSKTM Logo"
-						width={1000}
-						height={1000}
-						className="h-16 md:h-28 lg:h-32 w-auto mx-auto mb-6 md:mb-10"
-					/>
-
 					<h1 className="z-10 scroll-m-20 max-w-4xl mx-auto px-4 text-3xl sm:text-4xl md:text-5xl lg:text-[6vh] xl:text-[8vh] font-extrabold tracking-wide uppercase text-center mb-6 md:mb-10 lg:mb-12">
-						<span className="text-black">
-							2023/2024 Dean Award{" "}
-						</span>
+						<span className="text-black">2023/2024 Dean Award </span>
 						<LineShadowText>Ceremony</LineShadowText>
 					</h1>
 					<div className="max-w-3xl mx-auto px-4 text-lg sm:text-xl md:text-2xl">

@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 	icons: {
 		icon: [
 			{
-				url: "/icon/favicon.ico",
-				href: "/icon/favicon.ico",
+				url: "/icon/icon.svg",
+				href: "/icon/icon.svg",
 			},
 		],
 	},
@@ -27,21 +27,6 @@ export const metadata: Metadata = {
 		"academic excellence",
 		"award ceremony",
 	],
-	openGraph: {
-		title: "FSKTM Dean's Award Ceremony 2024 🎓",
-		description:
-			"🎉 Celebrating top achievers at FSKTM UTHM's annual Dean's Award Ceremony. Recognizing excellence in computer science education. 🏆",
-		type: "website",
-		url: "https://dac-fsktm.vercel.app",
-		images: [
-			{
-				url: "/img/fsktmlogo.png",
-				width: 1200,
-				height: 630,
-				alt: "FSKTM Dean's Award Ceremony 2024",
-			},
-		],
-	},
 };
 
 export default function RootLayout({
