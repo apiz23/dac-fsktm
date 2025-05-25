@@ -6,10 +6,10 @@ import Body from "./body";
 
 const links = [
 	{ title: "Home", href: "/", src: "home.png" },
-	{ title: "CheckEligable", href: "#eligible", src: "shop.png" },
+	{ title: "Check Eligable", href: "#eligible", src: "shop.png" },
 	{ title: "Countdown", href: "#countdown", src: "home.png" },
 	{
-		title: "TechVentura",
+		title: "Tech Ventura",
 		href: "https://tech-ventura.vercel.app/",
 		src: "home.png",
 	},

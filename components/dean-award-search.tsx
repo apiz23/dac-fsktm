@@ -178,7 +178,7 @@ export default function DeanAwardSearch() {
 											value={matric}
 											onChange={(e) => setMatric(e.target.value)}
 											className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-											placeholder="e.g. ABC12345"
+											placeholder="e.g. DI230052"
 											aria-describedby="matric-help"
 										/>
 										<p id="matric-help" className="mt-2 text-sm text-gray-500">
@@ -231,7 +231,7 @@ export default function DeanAwardSearch() {
 											value={matric}
 											onChange={(e) => setMatric(e.target.value)}
 											className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-											placeholder="e.g. ABC12345"
+											placeholder="e.g. DI230052"
 											aria-describedby="matric-help"
 										/>
 										<p id="matric-help" className="mt-2 text-sm text-gray-500">
