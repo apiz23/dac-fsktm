@@ -14,6 +14,7 @@ import stopwatch from "@/public/anim/stopwatch.json";
 import graduate from "@/public/anim/graduate.json";
 import DeanAwardSearch from "@/components/dean-award-search";
 import { LineShadowText } from "@/components/magicui/line-shadow-text";
+import Inform from "@/components/inform";
 
 export default function Home() {
 	const lenisRef = useRef<Lenis | null>(null);
@@ -39,7 +40,7 @@ export default function Home() {
 	}, []);
 
 	const scrollToCountdown = () => {
-		const target = document.getElementById("eligible");
+		const target = document.getElementById("details");
 		if (target && lenisRef.current) {
 			lenisRef.current.scrollTo(target, {
 				offset: 0,
@@ -52,10 +53,10 @@ export default function Home() {
 	return (
 		<>
 			<Header />
-			<div className="relative min-h-screen pt-32 md:pt-10 border-b-4 border-black">
+			<div className="relative min-h-screen pt-32 md:pt-10">
 				<BlobBackground />
 				<div className="container mx-auto px-4 sm:px-6 flex flex-col items-center justify-center h-full">
-					<div className="w-56 h-56 sm:w-80 sm:h-80 mx-auto">
+					<div className="w-56 h-56 sm:w-80 sm:h-80 mx-auto bg-transparent">
 						<Lottie animationData={graduate} loop={true} />
 					</div>
 
@@ -79,14 +80,17 @@ export default function Home() {
 					</div>
 				</div>
 			</div>
-			<div className="min-h-[70vh] border-b-4 border-black" id="eligible">
+			<div id="details">
+				<Inform />
+			</div>
+			<div className="min-h-[70vh]" id="eligible">
 				<DeanAwardSearch />
 			</div>
 			<div
-				className="border-b-4 border-black min-h-screen grid grid-cols-1 md:grid-cols-7 items-center justify-items-center md:gap-8 px-4 py-10 pb-20 bg-gradient-to-b from-white to-neutral-200"
+				className="border-b-4 border-black min-h-screen grid grid-cols-1 md:grid-cols-7 items-center justify-items-center md:gap-8 px-4 py-10 pb-20 bg-gradient-to-b from-white to-neutral-300"
 				id="countdown"
 			>
-				<div className="w-fit md:w-96 h-3/4 md:h-96 mx-auto col-span-3">
+				<div className="w-fit md:w-96 h-3/4 md:h-96 mx-auto col-span-3 bg-transparent">
 					<Lottie animationData={stopwatch} loop={true} />
 				</div>
 

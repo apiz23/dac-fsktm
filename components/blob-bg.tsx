@@ -9,7 +9,7 @@ export default function BlobBackground() {
 	const isMobile = useIsMobile();
 
 	return (
-		<div className="absolute inset-0 overflow-hidden -z-10">
+		<div className="absolute inset-0 overflow-hidden -z-10  bg-gradient-to-b from-white to-neutral-200">
 			{/* Blue Blob with Lottie */}
 			<div
 				className="absolute"

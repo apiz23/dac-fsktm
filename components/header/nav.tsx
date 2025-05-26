@@ -6,6 +6,7 @@ import Body from "./body";
 
 const links = [
 	{ title: "Home", href: "/", src: "home.png" },
+	{ title: "Details", href: "#details", src: "shop.png" },
 	{ title: "Check Eligable", href: "#eligible", src: "shop.png" },
 	{ title: "Countdown", href: "#countdown", src: "home.png" },
 	{
