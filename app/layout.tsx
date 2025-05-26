@@ -37,8 +37,10 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`${poppins.className} antialiased`}>
-				<Toaster richColors />
-				<div className="overflow-y-hidden">{children}</div>
+				<div className="overflow-y-hidden">
+					<Toaster position="top-center" richColors />
+					{children}
+				</div>
 			</body>
 		</html>
 	);

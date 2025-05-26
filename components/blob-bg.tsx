@@ -19,13 +19,20 @@ export default function BlobBackground() {
 				}}
 			>
 				<motion.div
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					transition={{ duration: 1 }}
-					className="w-[250px] h-[250px] md:w-[600px] md:h-[600px] bg-blue-200 rounded-full opacity-80 animate-blob border-4 border-blue-400 shadow-lg"
+					initial={{ opacity: 0, y: 10 }}
+					animate={{
+						opacity: 1,
+						y: [0, -10, 0],
+					}}
+					transition={{
+						duration: 4,
+						repeat: Infinity,
+						ease: "easeInOut",
+					}}
+					className="w-[250px] h-[250px] md:w-[600px] md:h-[600px] bg-blue-200 rounded-full opacity-80 border-4 border-blue-400 shadow-lg"
 				/>
 				<div
-					className="relative"
+					className="hidden md:block relative"
 					style={{
 						top: isMobile ? "170px" : "-90px",
 						left: isMobile ? "30px" : "50px",
@@ -37,7 +44,6 @@ export default function BlobBackground() {
 				</div>
 			</div>
 
-			{/* Red Blob with Lottie */}
 			<div
 				className="absolute"
 				style={{
@@ -46,17 +52,25 @@ export default function BlobBackground() {
 				}}
 			>
 				<motion.div
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					transition={{ duration: 1, delay: 0.5 }}
-					className="w-[200px] h-[200px] md:w-[500px] md:h-[500px] bg-red-400 rounded-full opacity-80 animate-blob border-4 border-red-500 shadow-lg"
+					initial={{ opacity: 0, y: 10 }}
+					animate={{
+						opacity: 1,
+						y: [0, -15, 0],
+					}}
+					transition={{
+						duration: 5,
+						repeat: Infinity,
+						ease: "easeInOut",
+						delay: 0.5,
+					}}
+					className="w-[200px] h-[200px] md:w-[500px] md:h-[500px] bg-red-400 rounded-full opacity-80 border-4 border-red-500 shadow-lg"
 				/>
 				<div
-					className="relative"
+					className="hidden md:block relative"
 					style={{
-						top: isMobile ? "100px" : "-150px",
+						top: isMobile ? "150px" : "-150px",
 						right: isMobile ? "30px" : "-100px",
-						width: isMobile ? "200px" : "260px",
+						width: isMobile ? "250px" : "260px",
 						height: isMobile ? "500px" : "720px",
 					}}
 				>

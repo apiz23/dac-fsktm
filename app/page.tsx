@@ -52,7 +52,7 @@ export default function Home() {
 	return (
 		<>
 			<Header />
-			<div className="relative min-h-screen pt-20 md:pt-10 border-b-4 border-black">
+			<div className="relative min-h-screen pt-32 md:pt-10 border-b-4 border-black">
 				<BlobBackground />
 				<div className="container mx-auto px-4 sm:px-6 flex flex-col items-center justify-center h-full">
 					<div className="w-56 h-56 sm:w-80 sm:h-80 mx-auto">

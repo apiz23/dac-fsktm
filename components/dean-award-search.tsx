@@ -28,11 +28,11 @@ import confetti from "canvas-confetti";
 import search from "@/public/anim/search.json";
 import { Loader2 } from "lucide-react";
 import { LineShadowText } from "./magicui/line-shadow-text";
+import { toast } from "sonner";
 
 export default function DeanAwardSearch() {
 	const [matric, setMatric] = useState("");
 	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState("");
 	const [openSearch, setOpenSearch] = useState(false);
 	const [openResult, setOpenResult] = useState(false);
 	const [eligibilityResult, setEligibilityResult] = useState<{
@@ -73,11 +73,10 @@ export default function DeanAwardSearch() {
 	async function handleSearch(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 		setLoading(true);
-		setError("");
 		setEligibilityResult(null);
 
 		if (!matric.trim()) {
-			setError("Please enter your matriculation number");
+			toast.error("Please enter your matriculation number");
 			setLoading(false);
 			return;
 		}
@@ -94,7 +93,6 @@ export default function DeanAwardSearch() {
 
 			const data = await res.json();
 
-			// Filter eligible semesters based on the results object
 			const filteredEligibleSemesters = data.results
 				? Object.keys(data.results)
 						.filter((sem) => data.results[sem])
@@ -111,21 +109,21 @@ export default function DeanAwardSearch() {
 				setOpenResult(true);
 				triggerConfetti();
 			} else {
-				setError("No eligible record found for either semester");
+				toast.error("No eligible record found for either semester");
 			}
 		} catch (err) {
-			if (err instanceof Error) {
-				setError(err.message || "Error verifying eligibility");
-			} else {
-				setError("An unexpected error occurred");
-			}
+			const errorMsg =
+				err instanceof Error
+					? err.message || "Error verifying eligibility"
+					: "An unexpected error occurred";
+			toast.error(errorMsg);
 		} finally {
 			setLoading(false);
 		}
 	}
 
 	return (
-		<section className="h-screen py-20 bg-white">
+		<section className="h-screen pb-20 pt-5 bg-white">
 			<div className="mx-auto max-w-5xl text-center px-4">
 				<header className="mb-16">
 					<div className="w-full md:w-96 h-64 mx-auto">
@@ -136,12 +134,12 @@ export default function DeanAwardSearch() {
 						<span className="bg-gradient-to-r from-[#dac8b4] to-[#422800] bg-clip-text text-transparent">
 							Dean{"'"}s List Award
 						</span>
-						<span className="block mt-4">
+						<span className="block mt-2">
 							Eligibility <LineShadowText>Check</LineShadowText>
 						</span>
 					</h1>
 
-					<p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+					<p className="text-md md:text-xl text-gray-600 max-w-3xl mx-auto">
 						Verify your qualification for this prestigious academic honor recognizing
 						exceptional performance and scholarly achievement
 					</p>
@@ -185,10 +183,6 @@ export default function DeanAwardSearch() {
 											Enter your university matriculation number
 										</p>
 									</div>
-
-									{error && (
-										<div className="p-3 bg-red-50 text-red-700 rounded-lg">{error}</div>
-									)}
 									<Button
 										type="submit"
 										disabled={loading}
@@ -238,11 +232,6 @@ export default function DeanAwardSearch() {
 											Enter your university matriculation number
 										</p>
 									</div>
-
-									{error && (
-										<div className="p-3 bg-red-50 text-red-700 rounded-lg">{error}</div>
-									)}
-
 									<DialogFooter>
 										<Button
 											type="submit"
@@ -284,7 +273,7 @@ export default function DeanAwardSearch() {
 								<div className="w-full h-72 mx-auto">
 									<Lottie animationData={congrats} loop={false} />
 								</div>
-								<div className="mt-4 text-center">
+								<div className="mt-20 text-center">
 									{eligibilityResult?.eligibleSemesters.map((sem) => (
 										<div key={sem} className="mb-2 text-lg font-medium">
 											✅ Eligible for Semester {sem} 23/24
