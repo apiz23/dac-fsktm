@@ -109,7 +109,7 @@ export default function DeanAwardSearch() {
 				setOpenResult(true);
 				triggerConfetti();
 			} else {
-				toast.error("No eligible record found for either semester");
+				toast.error("Not eligible for both semesters in 23/24");
 			}
 		} catch (err) {
 			const errorMsg =
@@ -256,8 +256,8 @@ export default function DeanAwardSearch() {
 
 				{isMobile ? (
 					<Drawer open={openResult} onOpenChange={setOpenResult}>
-						<DrawerContent className="h-[80vh]">
-							<DrawerHeader>
+						<DrawerContent className="max-h-[90vh]">
+							<DrawerHeader className="px-4 sm:px-6">
 								<DrawerTitle className="text-2xl text-green-600">
 									{eligibilityResult?.eligibleSemesters.length === 2
 										? "Congratulations!"
@@ -269,22 +269,26 @@ export default function DeanAwardSearch() {
 										: `You've qualified for Semester ${eligibilityResult?.eligibleSemesters[0]}!`}
 								</DrawerDescription>
 							</DrawerHeader>
-							<div className="p-6 overflow-y-auto">
-								<div className="w-full h-72 mx-auto">
-									<Lottie animationData={congrats} loop={false} />
+
+							<div className="p-4 sm:p-6 flex flex-col flex-grow overflow-auto">
+								<div className="w-full h-56 sm:h-64 mx-auto flex-shrink-0">
+									<Lottie animationData={congrats} loop={false} className="h-full" />
 								</div>
-								<div className="mt-20 text-center">
+
+								<div className="mt-8 sm:mt-12 text-center flex-grow">
 									{eligibilityResult?.eligibleSemesters.map((sem) => (
 										<div key={sem} className="mb-2 text-lg font-medium">
 											✅ Eligible for Semester {sem} 23/24
 										</div>
 									))}
 								</div>
+
+								<p className="text-center text-gray-600 mt-4 mb-4 sm:mb-6">
+									You{"'"}re invited to attend the award ceremony
+								</p>
 							</div>
-							<p className="text-center text-gray-600 mt-4">
-								You{"'"}re invited to attend the award ceremony
-							</p>
-							<DrawerFooter className="gap-3">
+
+							<DrawerFooter className="px-4 sm:px-6 pb-4 sm:pb-6 gap-3">
 								<Link
 									href="https://docs.google.com/forms/d/e/1FAIpQLSf22DDln9VZkwMl9F0ik2kECX-r4ut1rJz0ZPUnal5BSBNM8w/closedform"
 									target="_blank"
