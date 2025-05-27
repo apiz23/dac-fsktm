@@ -127,7 +127,7 @@ export default function DeanAwardSearch() {
 	}
 
 	return (
-		<section className="h-screen pb-20 pt-5 bg-white">
+		<section className="pb-20 pt-5 bg-white">
 			<div className="mx-auto max-w-5xl text-center px-4">
 				<header className="mb-16">
 					<div className="w-full md:w-96 h-64 mx-auto">

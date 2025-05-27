@@ -15,6 +15,7 @@ import graduate from "@/public/anim/graduate.json";
 import DeanAwardSearch from "@/components/dean-award-search";
 import { LineShadowText } from "@/components/magicui/line-shadow-text";
 import Inform from "@/components/inform";
+import FAQ from "@/components/FAQ";
 
 export default function Home() {
 	const lenisRef = useRef<Lenis | null>(null);
@@ -53,7 +54,7 @@ export default function Home() {
 	return (
 		<>
 			<Header />
-			<div className="relative min-h-screen pt-32 md:pt-10">
+			<div className="relative min-h-fit md:min-h-screen pt-32 md:pt-10">
 				<BlobBackground />
 				<div className="container mx-auto px-4 sm:px-6 flex flex-col items-center justify-center h-full">
 					<div className="w-56 h-56 sm:w-80 sm:h-80 mx-auto bg-transparent">
@@ -83,22 +84,29 @@ export default function Home() {
 			<div id="details">
 				<Inform />
 			</div>
-			<div className="min-h-[70vh]" id="eligible">
+			<div className="min-h-fit" id="eligible">
 				<DeanAwardSearch />
 			</div>
+
 			<div
-				className="border-b-4 border-black min-h-screen grid grid-cols-1 md:grid-cols-7 items-center justify-items-center md:gap-8 px-4 py-10 pb-20 bg-gradient-to-b from-white to-neutral-300"
+				className="relative min-h-fit py-32 flex flex-col md:flex-row items-center justify-center p-4 bg-gradient-to-b from-white to-neutral-300"
 				id="countdown"
 			>
-				<div className="w-fit md:w-96 h-3/4 md:h-96 mx-auto col-span-3 bg-transparent">
-					<Lottie animationData={stopwatch} loop={true} />
+				<div className="w-full md:w-1/3 flex justify-center mb-8 md:mb-0">
+					<div className="w-fit h-full md:w-full md:h-full mx-auto">
+						<Lottie animationData={stopwatch} loop={true} />
+					</div>
 				</div>
 
-				<div className="w-full max-w-2xl col-span-4 ">
-					<CountdownToJune11 />
+				<div className="relative z-10 p-4 w-full md:w-2/3 max-w-2xl">
+					<div className="w-full max-w-2xl col-span-4 ">
+						<CountdownToJune11 />
+					</div>
 				</div>
 			</div>
-
+			<div className="pb-32 bg-gradient-to-b from-neutral-300 to-neutral-200 border-b-4 border-black">
+				<FAQ />
+			</div>
 			<Footer />
 		</>
 	);

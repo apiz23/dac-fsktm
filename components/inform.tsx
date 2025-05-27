@@ -5,7 +5,7 @@ import { Calendar, Landmark, Shirt } from "lucide-react";
 
 export default function Inform() {
 	return (
-		<div className="relative min-h-screen flex flex-col md:flex-row items-center justify-center p-4 bg-gradient-to-b from-neutral-200 to-white">
+		<div className="relative min-h-fit py-32 flex flex-col md:flex-row items-center justify-center p-4 bg-gradient-to-b from-neutral-200 to-white">
 			{/* Animation container - positioned to the left on larger screens */}
 			<div className="w-full md:w-1/3 flex justify-center mb-8 md:mb-0">
 				<div className="w-fit h-full md:w-full md:h-full mx-auto">
