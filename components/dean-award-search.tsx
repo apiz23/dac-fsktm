@@ -82,9 +82,13 @@ export default function DeanAwardSearch() {
 		}
 
 		try {
-			const res = await fetch(
-				`/api/dean-award/search?id=${encodeURIComponent(matric.trim())}`
-			);
+			const res = await fetch("/api/dean-award/search", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ id: matric.trim() }),
+			});
 
 			if (!res.ok) {
 				const errData = await res.json();
@@ -130,7 +134,7 @@ export default function DeanAwardSearch() {
 						<Lottie animationData={search} loop={true} />
 					</div>
 
-					<h1 className="text-balance text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl mb-6">
+					<h1 className="text-balance text-5xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl lg:text-[8vh] mb-6">
 						<span className="bg-gradient-to-r from-[#dac8b4] to-[#422800] bg-clip-text text-transparent">
 							Dean{"'"}s List Award
 						</span>

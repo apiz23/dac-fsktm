@@ -18,14 +18,14 @@ async function fetchSheetData(sem: "1" | "2") {
 		.map((row) => row.split(",").map((cell) => cell.trim()));
 }
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
 	try {
-		const { searchParams } = new URL(req.url);
-		const id = searchParams.get("id");
+		const body = await req.json();
+		const id = body.id;
 
 		if (!id) {
 			return NextResponse.json(
-				{ error: "Missing matric number id param" },
+				{ error: "Missing matric number id in request body" },
 				{ status: 400 }
 			);
 		}
@@ -33,7 +33,6 @@ export async function GET(req: NextRequest) {
 		const matric = id.trim().toLowerCase().replace(/\s/g, "");
 		const results: Record<string, boolean> = {};
 
-		// Check both semesters
 		for (const sem of ["1", "2"] as const) {
 			try {
 				const data = await fetchSheetData(sem);
@@ -47,7 +46,6 @@ export async function GET(req: NextRequest) {
 			}
 		}
 
-		// Determine which semesters the student is eligible for
 		const eligibleSemesters = Object.entries(results)
 			.filter(([found]) => found)
 			.map(([sem]) => sem.replace("semester_", ""));
@@ -55,7 +53,7 @@ export async function GET(req: NextRequest) {
 		return NextResponse.json({
 			eligible: eligibleSemesters.length > 0,
 			eligibleSemesters,
-			results, // includes both semesters' results
+			results,
 		});
 	} catch (err) {
 		if (err instanceof Error) {
