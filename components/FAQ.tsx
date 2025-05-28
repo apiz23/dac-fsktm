@@ -25,6 +25,12 @@ export default function FAQ() {
 				"For both semesters 23/24, you have to choose one of the food options. For example, if you only want food in the morning, you can select option 1, if you want food in the evening, select option 2, if you want food in the morning and evening, select option 3",
 			img: accordion1,
 		},
+		{
+			question:
+				"What are the differences between Session 1 (morning) and Session 2 (evening)?",
+			answer:
+				"Session 1, which is held in the morning, is for students who received the Dean's Award for Semester 1 of the 2023/2024 session. Session 2, held in the evening, is for those who received the Dean's Award for Semester 2 of the same academic year.",
+		},
 	];
 
 	return (
