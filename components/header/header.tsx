@@ -13,7 +13,7 @@ export default function Index() {
 	const [isActive, setIsActive] = useState(false);
 
 	return (
-		<div className="fixed w-screen box-border p-2 md:px-10 z-50 border-b-2 border-black bg-white">
+		<div className="fixed w-screen box-border p-2 md:px-10 z-40 border-b-2 border-black bg-white">
 			<div className="flex justify-between items-center text-[25px] sm:text-[30px] font-normal relative z-50">
 				{/* Left side: logo (hidden on mobile) */}
 				<div className="hidden sm:flex items-center md:px-5">

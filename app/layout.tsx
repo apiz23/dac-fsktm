@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
+import { ScrollProgress } from "@/components/magicui/scroll-progress";
 
 const poppins = Poppins({
 	weight: "500",
@@ -39,6 +40,7 @@ export default function RootLayout({
 			<body className={`${poppins.className} antialiased`}>
 				<div className="overflow-y-hidden">
 					<Toaster position="top-center" richColors />
+					<ScrollProgress />
 					{children}
 				</div>
 			</body>
